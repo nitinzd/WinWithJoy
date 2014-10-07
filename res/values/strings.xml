@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Win With Joy</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_new">New</string>
+    <string name="grade_show">Grade name</string>
+<string name="student_show">Student name</string>
+<string name="date_show">Date</string>
+<string name="marks_show">Marks</string>
+<string name="select_action">Select</string>
+<string name="btn_new">New</string>
+<string name="btn_delete">Delete</string>
+<string name="btn_edit">Edit</string>
+<string name="grade_name">Enter grade name</string>
+<string name="student_name">Enter student name</string>
+<string name="date">Enter date</string>
+<string name="marks">Use + / -</string>
+<string name="btn_plus">+</string>
+<string name="btn_minus">-</string>
+<string name="btn_submit">Submit</string>
+<string name="btn_cancel">Cancel</string>
+</resources>
