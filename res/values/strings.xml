@@ -21,4 +21,11 @@
 <string name="btn_minus">-</string>
 <string name="btn_submit">Submit</string>
 <string name="btn_cancel">Cancel</string>
+<string name="delete_title">Delete</string>
+<string name="delete_message">Are you sure you want to delete selected items?</string>
+<string name="delete_ok">Ok</string>
+<string name="delete_cancel">Cancel</string>
+<string name="update_message">Please select a row to update.</string>
+<string name="update_title">Update</string>
+<string name="update_ok">Ok</string>
 </resources>
