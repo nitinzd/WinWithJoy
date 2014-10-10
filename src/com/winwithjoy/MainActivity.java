@@ -109,8 +109,7 @@ tDate.setText(dFormat.format(date));
     			table.addView(tRow);
     		}//End Row for
     	}
-    	    	System.out.println("The row count is " + table.getChildCount());
-    }
+    	    	    }
     
     public void increaseMarks(View view) {
     	TextView tMarks = (TextView) findViewById(R.id.marks);
@@ -158,29 +157,31 @@ getRecords();
     }
     
     public void deleteRecord() {
+    	final SQLiteDatabase db = dbHelper.getWritableDatabase();
+    	TableLayout table = (TableLayout) findViewById(R.id.t_student);
+    	final String selection = Student._ID + " LIKE ?";
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	ArrayList<String> listIds = new ArrayList<String>();
+    	    	int iRowCount = table.getChildCount();
+    	if(iRowCount > 0) {
+    	for(int iCount = 1; iCount<iRowCount;iCount++) {
+    		TableRow tRow = (TableRow) table.getChildAt(iCount);
+CheckBox check = (CheckBox) tRow.getChildAt(0);
+    		if(check.isChecked()) {
+    			listIds.add(String.valueOf(check.getId()));
+    		}
+    	}
+    	}
+    	final String []arrIds = listIds.toArray(new String[listIds.size()]);
+    	if(arrIds.length > 0) {
+    	
 builder.setTitle(R.string.delete_title);
 builder.setMessage(R.string.delete_message);
 builder.setPositiveButton(R.string.delete_ok, new DialogInterface.OnClickListener() {
 		@Override
 	public void onClick(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
-			SQLiteDatabase db = dbHelper.getWritableDatabase();
-	    	TableLayout table = (TableLayout) findViewById(R.id.t_student);
-	    	String selection = Student._ID + " LIKE ?";
-	    	ArrayList<String> listIds = new ArrayList<String>();
-	    	    	int iRowCount = table.getChildCount();
-	    	if(iRowCount > 0) {
-	    	for(int iCount = 1; iCount<iRowCount;iCount++) {
-	    		TableRow tRow = (TableRow) table.getChildAt(iCount);
-	CheckBox check = (CheckBox) tRow.getChildAt(0);
-	    		if(check.isChecked()) {
-	    			listIds.add(String.valueOf(check.getId()));
-	    		}
-	    	}
-	    	}
-	    	String []arrIds = listIds.toArray(new String[listIds.size()]);
-	db.delete(Student.TABLE_NAME, selection, arrIds);
+				db.delete(Student.TABLE_NAME, selection, arrIds);
 	getRecords();
 	    		}
 });
@@ -192,7 +193,23 @@ builder.setNegativeButton(R.string.delete_cancel, new DialogInterface.OnClickLis
 });
 AlertDialog dialog = builder.create();
 dialog.show();
-
+    	}
+    	else {
+AlertDialog dialog;
+builder.setTitle(R.string.delete_title);
+builder.setMessage(R.string.delete_error);
+builder.setPositiveButton(R.string.delete_ok, new DialogInterface.OnClickListener() {
+	
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+		
+	}
+});
+dialog = builder.create();
+dialog.show();
+    	}
+    	
     }
     
     public void editRecord() {
@@ -218,8 +235,7 @@ CheckBox check = (CheckBox) tRow.getChildAt(0);
     	}
     	}
     	    	String []arrIds = listIds.toArray(new String[listIds.size()]);
-    	System.out.println("The row id is " + arrIds.toString());
-    	    	if(arrIds.length > 0) {
+    	    	    	if(arrIds.length > 0) {
     	String[] columns = {
     	    	    	    	Student.COLUMN_GRADENAME,
     	    	Student.COLUMN_STUDENTNAME,
